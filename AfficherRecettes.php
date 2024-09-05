@@ -1,10 +1,26 @@
 <?php
-// Tableau de recettes associatives
+
+$users = [
+    [
+        'email' => 'Aboubacar@example.com',
+        'name' => 'Aboubacar Diallo'
+    ],
+    [
+        'email' => 'matthieu-xml@exemple.com',
+        'name' => 'Matthieu Dupont'
+    ],
+    [
+        'email' => 'Rachid@example.com',
+        'name' => 'Rachid El Amrani'
+    ]
+];
+
+
 $recipes = [
     [
         'title' => 'Mafe',
         'recipe' => 'Etape 1 : des legumes, ...',
-        'author' => 'Aboubacar@exemple.com',
+        'author' => 'Aboubacar@example.com',
         'enable' => true
     ],
     [
@@ -20,6 +36,33 @@ $recipes = [
         'enable' => true
     ]
 ];
+
+
+function getUserByEmail($email, $users) {
+    foreach ($users as $user) {
+        if ($user['email'] === $email) {
+            return $user['name'];
+        }
+    }
+    return 'Auteur inconnu'; 
+}
+
+
+function displayRecipes($recipes, $users) {
+    echo '<ul>';
+    foreach ($recipes as $recipe) {
+        if ($recipe['enable']) {
+            $authorName = getUserByEmail($recipe['author'], $users);
+            echo '<li>';
+            echo '<h2>' . htmlspecialchars($recipe['title']) . '</h2>';
+            echo '<p>' . htmlspecialchars($recipe['recipe']) . '</p>';
+            echo '<p class="author">Contributeur : <span class="user">' . htmlspecialchars($authorName) . '</span></p>';
+            echo '</li>';
+        }
+    }
+    echo '</ul>';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +70,7 @@ $recipes = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Affichage des recettes</title>
+    <title>Affichage des recettes et utilisateurs</title>
     <style>
         body {
             font-family: 'Helvetica', sans-serif;
@@ -71,22 +114,19 @@ $recipes = [
             color: #777;
             margin-top: 8px;
         }
+        .user {
+            color: #444;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-<h1>Liste des recettes</h1>
-<ul>
-<?php foreach ($recipes as $recipe): ?>
-    <?php if ($recipe['enable']): ?>
-        <li>
-            <h2><?php echo htmlspecialchars($recipe['title']); ?></h2>
-            <p><?php echo htmlspecialchars($recipe['recipe']); ?></p>
-            <p class="author">Auteur : <?php echo htmlspecialchars($recipe['author']); ?></p>
-        </li>
-    <?php endif; ?>
-<?php endforeach; ?>
-</ul>
+<h1>Liste des recettes avec auteurs</h1>
+<?php
+
+displayRecipes($recipes, $users);
+?>
 
 </body>
 </html>
