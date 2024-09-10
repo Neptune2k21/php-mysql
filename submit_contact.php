@@ -9,7 +9,7 @@
     </head>
  
     <body>
- 
+
     <!-- L'en-tête -->
     <?php include('header.php'); ?>
     
@@ -17,30 +17,26 @@
     <div class="container my-4">
 
         <?php
-        // Vérification des paramètres GET
-        if (!isset($_GET['email']) || !isset($_GET['message'])) {
+        // Vérification des paramètres POST
+        if (!isset($_POST['email']) || !isset($_POST['message'])) {
             echo('<h1>Il faut un email et un message pour soumettre le formulaire.</h1>');
             // Arrête l'exécution de PHP
             return;
         }
-        ?>
-        <?php
-            if (
-            (!isset($_GET['email']) || !filter_var($_GET['email'], FILTER_VALIDATE_EMAIL))
-            || (!isset($_GET['message']) || empty($_GET['message']))
-            )
-                {
-            echo('Il faut un email et un message valides pour soumettre le formulaire.');
+
+        // Validation de l'email et du message
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) || empty($_POST['message'])) {
+            echo('<h1>Il faut un email et un message valides pour soumettre le formulaire.</h1>');
             return;
-            }
+        }
         ?>
 
         <h1>Message bien reçu !</h1>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Rappel de vos informations</h5>
-                <p class="card-text"><b>Email</b> : <?php echo htmlspecialchars($_GET['email']); ?> </p>
-                <p class="card-text"><b>Message</b> : <?php echo htmlspecialchars(nl2br($_GET['message'])); ?> </p>
+                <p class="card-text"><b>Email</b> : <?php echo htmlspecialchars($_POST['email']); ?> </p>
+                <p class="card-text"><b>Message</b> : <?php echo htmlspecialchars(nl2br($_POST['message'])); ?> </p>
             </div>
         </div>
     </div>
