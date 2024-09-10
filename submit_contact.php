@@ -15,6 +15,16 @@
     
     <!-- Le corps -->
     <div class="container my-4">
+
+        <?php
+        // Vérification des paramètres GET
+        if (!isset($_GET['email']) || !isset($_GET['message'])) {
+            echo('<h1>Il faut un email et un message pour soumettre le formulaire.</h1>');
+            // Arrête l'exécution de PHP
+            return;
+        }
+        ?>
+
         <h1>Message bien reçu !</h1>
         <div class="card">
             <div class="card-body">
