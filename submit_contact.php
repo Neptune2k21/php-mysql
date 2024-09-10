@@ -33,10 +33,10 @@
         $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
         $message = htmlspecialchars($_POST['message'], ENT_QUOTES, 'UTF-8');
 
-        // Traitement du fichier uploadé
+        // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
         if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] == 0) {
-            if ($_FILES['screenshot']['size'] <= 2000000) { // 2 Mo max
-                // Vérifier l'extension du fichier
+            if ($_FILES['screenshot']['size'] <= 1000000) { 
+                // Testons si l'extension est autorisée
                 $file_info = pathinfo($_FILES['screenshot']['name']);
                 $file_extension = strtolower($file_info['extension']);
                 $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
