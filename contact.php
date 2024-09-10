@@ -10,13 +10,13 @@
  
     <body>
 
-    <!-- L'en-tête -->
+  
     <?php include('header.php'); ?>
     
-    <!-- Formulaire de contact -->
+   
     <div class="container my-4">
         <h1>Contactez-nous</h1>
-        <form action="submit_contact.php" method="post">
+        <form action="submit_contact.php" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
@@ -25,15 +25,19 @@
                 <label for="message" class="form-label">Votre message</label>
                 <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
             </div>
+            <!-- Ajout champ d'upload ! -->
+            <div class="mb-3">
+                <label for="screenshot" class="form-label">Votre capture d'écran</label>
+                <input type="file" class="form-control" id="screenshot" name="screenshot" />
+            </div>
+            <!-- Fin ajout du champ -->
             <button type="submit" class="btn btn-primary">Envoyer</button>
         </form>
     </div>
     
-    <!-- Le pied de page -->
-    <?php include('footer.php'); ?>
-    
     <!-- Scripts Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include('footer.php'); ?>
     
     </body>
 </html>
