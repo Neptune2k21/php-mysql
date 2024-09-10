@@ -29,6 +29,8 @@
             echo('<h1>Il faut un email et un message valides pour soumettre le formulaire.</h1>');
             return;
         }
+        $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
+        $message = htmlspecialchars($_POST['message'], ENT_QUOTES, 'UTF-8');
         ?>
 
         <h1>Message bien reçu !</h1>
