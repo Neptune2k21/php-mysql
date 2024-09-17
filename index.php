@@ -1,56 +1,41 @@
+<!-- inclusion des variables et fonctions -->
+<?php
+session_start();
+require_once(__DIR__ . '/error.php');
+require_once(__DIR__ . '/functions.php');
+?>
+
 <!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mon site de recettes</title>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de recettes - Page d'accueil</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+    >
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <div class="container">
+        <!-- inclusion de l'entête du site -->
+        <?php require_once(__DIR__ . '/header.php'); ?>
+        <h1>Site de recettes</h1>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <style>
-           
-            html, body {
-                height: 100%;
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-            }
-            
-            
-            .content {
-                flex: 1;
-            }
-        </style>
-    </head>
- 
-    <body>
+        <!-- Formulaire de connexion -->
+        <?php require_once(__DIR__ . '/login.php'); ?>
 
-    <!-- L'en-tête -->
-    <?php include('header.php'); ?>
-    
-    <!-- Le corps -->
-    <div class="container my-4 content">
-        <h1>Mon site de recettes</h1>
-        <?php 
-        include('functions.php');
-        include('error.php');
-        ?>
-        <?php include_once('login.php'); ?>
-        <p>Bienvenue sur mon site de recettes !</p>
+        <?php foreach (get_recipes($recipes) as $recipe) : ?>
+            <article>
+                <h3><?php echo $recipe['title']; ?></h3>
+                <div><?php echo $recipe['recipe']; ?></div>
+                <i><?php echo display_author($recipe['author'], $users); ?></i>
+            </article>
+        <?php endforeach ?>
     </div>
-    <?php if(isset($loggedUser)): ?>
-<?php foreach(get_recipes($recipes, $limit) as $recipe) : ?>
-<article>
-<h3><?php echo $recipe['title']; ?> </h3>
-<div><?php echo $recipe['recipe']; ?> </div>
-<i><?php echo display_author($recipe['author'], $users); ?> </i>
-</article>
-<?php endforeach ?>
-<?php endif; ?>
-</div>
 
-    <?php include('footer.php'); ?>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    </body>
+    <!-- inclusion du bas de page du site -->
+    <?php require_once(__DIR__ . '/footer.php'); ?>
+</body>
 </html>
