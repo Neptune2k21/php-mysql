@@ -1,23 +1,24 @@
 <?php
+// variables.php
 
 $users = [
     [
         'full_name' => 'Mickaël Andrieu',
         'email' => 'mickael.andrieu@exemple.com',
         'age' => 34,
-        'password' => md5('Mickaël Andrieu' . 'mickael.andrieu@exemple.com')
+        'password' => 'S3cr3t'
     ],
     [
         'full_name' => 'Mathieu Nebra',
         'email' => 'mathieu.nebra@exemple.com',
         'age' => 34,
-        'password' => md5('Mathieu Nebra' . 'mathieu.nebra@exemple.com')
+        'password' => 'devine'
     ],
     [
         'full_name' => 'Laurène Castor',
         'email' => 'laurene.castor@exemple.com',
         'age' => 28,
-        'password' => md5('Laurène Castor' . 'laurene.castor@exemple.com')
+        'password' => 'P4ssW0rD'
     ],
 ];
 

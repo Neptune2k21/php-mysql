@@ -25,7 +25,7 @@
     <!-- L'en-tête -->
     <?php include('header.php');
           include('functions.php');
-          include('AfficherRecettes.php')
+          include('error.php')
     ?>
     
     <!-- Le corps -->
