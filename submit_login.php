@@ -30,7 +30,7 @@ if (isset($postData['email']) && isset($postData['password'])) {
         $_SESSION['LOGGED_USER'] = [
             'email' => $user['email'],
             'user_id' => $user['user_id'],
-            'full_name' => $user['full_name'] // Assurez-vous que cette valeur existe dans la base de données
+            'full_name' => $user['full_name'] 
         ];        
         // Redirection vers la page d'accueil après connexion
         redirectToUrl('index.php');

@@ -22,5 +22,4 @@ $users = [
     ],
 ];
 
-// Le tableau $recipes a été supprimé, car les recettes sont désormais récupérées depuis la base de données
 ?>

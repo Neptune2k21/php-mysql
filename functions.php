@@ -39,15 +39,16 @@ function display_recipe(array $recipe) : string
     return $recipe_content;
 }
 
-function display_author(string $authorEmail, array $users) : string
-{
-    for ($i = 0; $i < count($users); $i++) {
-        $author = $users[$i];
-        if ($authorEmail === $author['email']) {
-            return $author['full_name'] . '(' . $author['age'] . ' ans)';
-        }
+function display_author($author) {
+    // Vérifie si l'auteur est une chaîne vide
+    if (!isset($author) || empty($author)) {
+        return 'Auteur inconnu'; // Assurez-vous de retourner une chaîne
     }
+
+    // Exemple de logique additionnelle
+    return htmlspecialchars($author); // Assurez-vous que le retour est toujours une chaîne
 }
+
 
 function get_recipes(array $recipes) : array
 {

@@ -13,6 +13,9 @@
         <li class="nav-item">
           <a class="nav-link" href="contact.php">Contact</a>
         </li>
+        <li class="nav-item">
+          <a class="btn btn-primary" href="create_recettes.php">Ajouter Recette</a>
+        </li>
       </ul>
     </div>
   </div>

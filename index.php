@@ -23,7 +23,6 @@ require_once(__DIR__ . '/functions.php');
         <?php require_once(__DIR__ . '/header.php'); ?>
         <?php include_once('mysql.php');?>
         <h1>Site de recettes</h1>
-
         <!-- Formulaire de connexion -->
         <?php require_once(__DIR__ . '/login.php'); ?>
 

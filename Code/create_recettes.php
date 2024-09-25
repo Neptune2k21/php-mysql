@@ -3,7 +3,6 @@ session_start();
 
 // Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION['LOGGED_USER'])) {
-    // Redirige vers la page de connexion si non connecté
     header('Location: login.php');
     exit;
 }
@@ -22,7 +21,7 @@ if (!isset($_SESSION['LOGGED_USER'])) {
 </head>
 <body>
 
-<!-- Inclusion de la barre de navigation -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">Mon Site de Recettes</a>
