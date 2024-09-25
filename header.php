@@ -10,10 +10,6 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="recettes.php">Recettes</a>
-        </li>
-        Write your comments here -->
         <li class="nav-item">
           <a class="nav-link" href="contact.php">Contact</a>
         </li>

@@ -40,13 +40,12 @@ function display_recipe(array $recipe) : string
 }
 
 function display_author($author) {
-    // Vérifie si l'auteur est une chaîne vide
+
     if (!isset($author) || empty($author)) {
-        return 'Auteur inconnu'; // Assurez-vous de retourner une chaîne
+        return 'Auteur inconnu'; 
     }
 
-    // Exemple de logique additionnelle
-    return htmlspecialchars($author); // Assurez-vous que le retour est toujours une chaîne
+    return htmlspecialchars($author); 
 }
 
 
