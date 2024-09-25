@@ -21,6 +21,7 @@ require_once(__DIR__ . '/functions.php');
     <div class="container">
         <!-- inclusion de l'entête du site -->
         <?php require_once(__DIR__ . '/header.php'); ?>
+        <?php include_once('mysql.php');?>
         <h1>Site de recettes</h1>
 
         <!-- Formulaire de connexion -->

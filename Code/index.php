@@ -21,6 +21,7 @@
     <?php 
         include_once('variables.php');
         include_once('functions.php');
+        include_once('mysql.php');
     ?>
 
     <!-- Inclusion du formulaire de connexion -->

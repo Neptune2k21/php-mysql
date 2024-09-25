@@ -1,40 +1,50 @@
 <?php
 
-session_start();
-require_once(__DIR__ . '/error.php');
+session_start(); // Démarrer la session pour stocker les informations de l'utilisateur
+
+// Inclure la connexion à la base de données et les fonctions nécessaires
+require_once(__DIR__ . '/mysql.php');
 require_once(__DIR__ . '/functions.php');
 
-/**
- * On ne traite pas les super globales provenant de l'utilisateur directement,
- * ces données doivent être testées et vérifiées.
- */
+// Validation du formulaire
 $postData = $_POST;
 
-// Validation du formulaire
-if (isset($postData['email']) &&  isset($postData['password'])) {
+if (isset($postData['email']) && isset($postData['password'])) {
+    // Vérifier que l'email est valide
     if (!filter_var($postData['email'], FILTER_VALIDATE_EMAIL)) {
         $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Il faut un email valide pour soumettre le formulaire.';
-    } else {
-        foreach ($users as $user) {
-            if (
-                $user['email'] === $postData['email'] &&
-                $user['password'] === $postData['password']
-            ) {
-                $_SESSION['LOGGED_USER'] = [
-                    'email' => $user['email'],
-                    'user_id' => $user['user_id'],
-                ];
-            }
-        }
-
-        if (!isset($_SESSION['LOGGED_USER'])) {
-            $_SESSION['LOGIN_ERROR_MESSAGE'] = sprintf(
-                'Les informations envoyées ne permettent pas de vous identifier : (%s/%s)',
-                $postData['email'],
-                strip_tags($postData['password'])
-            );
-        }
+        redirectToUrl('login.php');
+        exit;
     }
 
-    redirectToUrl('index.php');
+    // Préparer la requête pour récupérer l'utilisateur en fonction de l'email
+    $query = 'SELECT * FROM users WHERE email = :email';
+    $statement = $db->prepare($query);
+    $statement->bindParam(':email', $postData['email']);
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    // Vérifier si l'utilisateur existe et si le mot de passe est correct
+    if ($user && password_verify($postData['password'], $user['password'])) {
+        // Stocker l'utilisateur dans la session après une connexion réussie
+        $_SESSION['LOGGED_USER'] = [
+            'email' => $user['email'],
+            'user_id' => $user['user_id'],
+            'full_name' => $user['full_name'] // Assurez-vous que cette valeur existe dans la base de données
+        ];        
+        // Redirection vers la page d'accueil après connexion
+        redirectToUrl('index.php');
+        exit;
+    } else {
+        // Si l'utilisateur n'existe pas ou le mot de passe est incorrect
+        $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Les informations envoyées ne permettent pas de vous identifier.';
+        redirectToUrl('login.php');
+        exit;
+    }
+} else {
+    // Si les données du formulaire sont manquantes
+    $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Veuillez remplir tous les champs.';
+    redirectToUrl('login.php');
+    exit;
 }
+?>
